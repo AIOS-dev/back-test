@@ -11,10 +11,21 @@ on:
 
 jobs:
   build:
-
+    env:
+      QGC_CREDENTIALS: "${{ secrets.QGC_CREDENTIALS }}"
+      QGC_URL: "${{ secrets.QGC_URL }}"
+      QGC_ORGANIZATION_ID: "84174119"
+      QGC_COMPONENT_ID: "367302485"
     runs-on: ubuntu-latest
 
     steps:
+    - name: Cache local Maven repository
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
     - uses: actions/checkout@v2
     - name: Set up JDK 11
       uses: actions/setup-java@v2
@@ -22,4 +33,6 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: |-
+        mvn -B package --file pom.xml
+        ./.github/workflows/upload-evidences.sh
