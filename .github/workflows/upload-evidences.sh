@@ -31,9 +31,11 @@ json_to_values /tmp/response.json >/tmp/info.sh
 
 . /tmp/info.sh
 
+if [ -z "${blobContainerUrl}" ]; then echo "Something went wrong: ${message}" ; exit 1 ; fi
+
 cd target/surefire-reports
 
-for file in $(find . -type f); do
+for file in $(find . -type f -name "*.txt" -o -name "*.xml"); do
   echo "Uploading $file"
   curl -s -X "PUT" -T "$file" \
     -H "${X_MS_DATE_H}" -H "x-ms-blob-type: BlockBlob" \
