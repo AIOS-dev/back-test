@@ -36,3 +36,9 @@ jobs:
       run: |-
         mvn -B package --file pom.xml
         ./.github/workflows/upload-evidences.sh
+    - name: Trigger SCA in QGC
+      run: |-
+        curl --user "${QGC_CREDENTIALS}" \
+          "${QGC_URL}/api/applications/${QGC_ORGANIZATION_ID}/componentqg/SOURCE_CODE_ANALYSIS/components/${QGC_COMPONENT_ID}/execution" \
+          -H "Content-Type: application/json" \
+          -d "{\"branchName\":\"${GITHUB_REF}\",\"gitUrl\":\"${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}.git\",\"qualityGateName\":\"Sonar way\"}"

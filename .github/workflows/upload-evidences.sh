@@ -35,6 +35,9 @@ if [ -z "${blobContainerUrl}" ]; then echo "Something went wrong: ${message}" ; 
 
 cd target/surefire-reports
 
+# Fixme : sometimes, container are created but not available. So adding a sleep hre
+sleep 5
+
 for file in $(find . -type f -name "*.txt" -o -name "*.xml"); do
   echo "Uploading $file"
   curl -s -X "PUT" -T "$file" \
