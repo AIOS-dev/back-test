@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -x
 # Script to upload evidences to QGC
 
 set -e
