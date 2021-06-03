@@ -1,0 +1,10 @@
+image: maven:3-jdk-11-slim
+
+variables:
+  QGC_SCA_QG_NAME: "Sonar way"
+
+build:
+  stage: build
+  retry: 2
+  script: |-
+    mvn -B package --file pom.xml && ./qgc/upload-evidences.sh && ./qgc/trigger-sca.sh
