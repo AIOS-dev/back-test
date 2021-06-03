@@ -2,6 +2,7 @@ image: maven:3-jdk-11-slim
 
 variables:
   QGC_SCA_QG_NAME: "Sonar way"
+  QGC_EVIDENCES_PATH: "target/surefire-reports"
 
 build:
   stage: build
