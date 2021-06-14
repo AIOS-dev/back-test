@@ -38,3 +38,5 @@ jobs:
       run: mvn -B package --file pom.xml && ./qgc/upload-evidences.sh
     - name: Trigger SCA in QGC
       run: ./qgc/trigger-sca.sh
+
+      
