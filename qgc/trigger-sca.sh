@@ -12,7 +12,7 @@ for env in QGC_URL QGC_CREDENTIALS QGC_COMPONENT_ID QGC_ORGANIZATION_ID QGC_SCA_
   fi
 done
 
-curl --user "${QGC_CREDENTIALS}" \
+curl --user "${MY_SECRET_QGC}" \
   "${QGC_URL}/api/applications/${QGC_ORGANIZATION_ID}/componentqg/SOURCE_CODE_ANALYSIS/components/${QGC_COMPONENT_ID}/execution" \
   -H "Content-Type: application/json" \
   -d "{\"branchName\":\"${BRANCH_NAME}\",\"gitUrl\":\"${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}.git\",\"qualityGateName\":\"${QGC_SCA_QG_NAME}\"}"
