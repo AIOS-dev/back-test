@@ -28,7 +28,7 @@ json_to_values() {
   sed 's/":"/="/g' "$1" | sed -E 's/"?,"/"'"\n"'/g' | sed 's/"}/"/' | grep "="
 }
 
-curl -s -X POST --user "${QGC_CREDENTIALS}" -d @/tmp/request.json \
+curl -s -X POST --user "${MY_SECRET_QGC}" -d @/tmp/request.json \
   -H "accept: application/json" -H "Content-Type: application/json" \
   "${QGC_URL}/api/applications/$QGC_ORGANIZATION_ID/componentqg/UNIT_TESTS/upload" >/tmp/response.json
 json_to_values /tmp/response.json >/tmp/info.sh
