@@ -16,7 +16,7 @@ done
 
 cat <<EOF >/tmp/request.json
 {
-  "componentId": $QGC_COMPONENT_ID,
+  "componentId": "$QGC_COMPONENT_ID",
   "url": "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}.git",
   "branchName": "$GITHUB_REF"
 }
